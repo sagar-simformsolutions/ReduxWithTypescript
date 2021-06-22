@@ -11,7 +11,10 @@ function MyStack() {
   return (
     <Provider store={store}>
       <NavigationContainer>
-        <Stack.Navigator>
+        <Stack.Navigator
+          screenOptions={{
+            headerShown: false
+          }}>
           <Stack.Screen name="Add Todo" component={TodoScreen} />
         </Stack.Navigator>
       </NavigationContainer>

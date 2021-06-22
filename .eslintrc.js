@@ -42,6 +42,15 @@ module.exports = {
   plugins: ['eslint-comments', 'react', 'react-hooks', 'react-native', '@react-native-community', 'prettier', 'jest'],
 
   settings: {
+    'import/resolver': {
+      'babel-module': {
+        extensions: ['.js', '.ts', '.tsx', '.json'],
+        alias: {
+          '@redux': './app/redux',
+          '@saga': './app/saga'
+        }
+      }
+    },
     react: {
       version: require('./package.json').dependencies.react
     }

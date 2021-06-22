@@ -1,5 +1,5 @@
 import { put, takeLatest } from 'redux-saga/effects';
-import { TodoTypes, TodoActions, AddTodoRequestType } from '../redux';
+import { TodoTypes, TodoActions, AddTodoRequestType } from '@redux';
 
 type ResponseType = {
   status: number;
