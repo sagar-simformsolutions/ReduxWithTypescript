@@ -23,10 +23,10 @@ export const INITIAL_STATE: ImmutableObject<TodoStateType> = Immutable<TodoState
 
 /* ------------- Types and Action Creators ------------- */
 type TodoActionsType = {
-  addTodoRequest: (request: string) => void;
-  addTodoSuccess: (data: string) => void;
-  addTodoFailure: (error: string | null) => void;
-  changeTodoStatus: (request: string) => void;
+  addTodoRequest: (request: string) => any;
+  addTodoSuccess: (data: string) => any;
+  addTodoFailure: (error: string | null) => any;
+  changeTodoStatus: (request: string) => any;
 };
 
 const { Types, Creators } = createActions<DefaultActionTypes, TodoActionsType>({
@@ -54,6 +54,7 @@ export const TodoSelectors: TodoSelectorsType = {
 export type AddTodoRequestType = {
   request: string;
 };
+
 function requestCall(
   state: ImmutableObject<TodoStateType>,
   { request }: AddTodoRequestType

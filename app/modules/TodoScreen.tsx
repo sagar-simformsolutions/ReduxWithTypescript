@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { TextInput, View, StyleSheet, Text, TouchableOpacity } from 'react-native';
+import { TextInput, View, StyleSheet, Text, TouchableOpacity, FlatList } from 'react-native';
 import { useDispatch, useSelector } from 'react-redux';
 import { TodoActions, TodoSelectors } from '@redux';
 import { AppDispatchType } from '../Store';
@@ -41,21 +41,27 @@ const TodoScreen = () => {
             }
           }}
         />
-        {todoList.map((elements: { status: string; data: string }, index: Number) => {
-          return (
-            <TouchableOpacity
-              style={styles.listContainer}
-              onPress={() => {
-                dispatch(TodoActions.changeTodoStatus(elements.data));
-              }}>
-              <Text
-                style={[styles.listText, elements.status === 'closed' ? styles.completedText : {}]}
-                key={`${index}_${elements}`}>
-                {elements.data}
-              </Text>
-            </TouchableOpacity>
-          );
-        })}
+
+        <FlatList
+          data={todoList}
+          contentContainerStyle={styles.flatList}
+          renderItem={({ item, index }) => {
+            return (
+              <TouchableOpacity
+                disabled={item.status === 'closed'}
+                style={styles.listContainer}
+                onPress={() => {
+                  dispatch(TodoActions.changeTodoStatus(item.data));
+                }}>
+                <Text
+                  style={[styles.listText, item.status === 'closed' ? styles.completedText : {}]}
+                  key={`${index}_${item}`}>
+                  {item.data}
+                </Text>
+              </TouchableOpacity>
+            );
+          }}
+        />
       </View>
     </View>
   );
@@ -103,7 +109,10 @@ const styles = StyleSheet.create({
   },
   completedText: {
     textDecorationLine: 'line-through',
-    textDecorationStyle: 'double',
+    textDecorationStyle: 'solid',
     textDecorationColor: 'red'
+  },
+  flatList: {
+    marginBottom: 20
   }
 });
